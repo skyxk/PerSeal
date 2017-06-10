@@ -28,8 +28,12 @@ public class LookVerActivity extends AppCompatActivity {
             HashMap<String, String> map = new HashMap<String, String>();
 
 //            map.put("textView2", "验证码"+(i+1));
+
             map.put("ItemText", verlist.get(i));
             mylist.add(map);
+            if(i==5){
+                break;
+            }
         }
         //生成适配器，数组===》ListItem
         SimpleAdapter mSchedule = new SimpleAdapter(this, //没什么解释

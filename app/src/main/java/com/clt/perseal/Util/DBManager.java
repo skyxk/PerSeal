@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
 import com.clt.perseal.Dto.UnitDto;
 
 import java.util.ArrayList;
@@ -162,7 +161,7 @@ public class DBManager {
      */
     public List<String> queryVer(){
         List<String> verlist = new ArrayList<String>() ;
-        Cursor c = db.rawQuery("SELECT vercode FROM verlist",null);
+        Cursor c = db.rawQuery("SELECT vercode FROM verlist order by _id DESC ",null);
         while (c.moveToNext()) {
             verlist.add(c.getString(c.getColumnIndex("vercode")));
         }

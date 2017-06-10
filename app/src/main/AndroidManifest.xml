@@ -22,28 +22,25 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ActivateActivity"
-            android:label="@string/activatelabel"/>
+            android:label="@string/activatelabel" />
         <activity
             android:name=".ApplicationActivity"
-            android:label="@string/application"/>
+            android:label="@string/application" />
         <activity
             android:name=".LookVerActivity"
-            android:label="@string/lookvercode"/>
+            android:label="@string/lookvercode" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/resgisterlabel" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

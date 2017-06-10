@@ -18,7 +18,7 @@ public class ApplicationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application);
         //初始化webview
-        initWebView(Constants.webUrl+"activateApp/sealApplyLogin.jsp");
+        initWebView(Constants.webUrl+"activateApp/applySuccess.jsp");
         //提供js调用
         webView.addJavascriptInterface(new JSInterface(),"Android");
 
