@@ -27,8 +27,8 @@ public class DBManager {
         db.execSQL("CREATE TABLE IF NOT EXISTS user (_id integer primary key autoincrement," +
                 " name varchar(36)," +
                 " phone varchar(20)," +
-                " password varchar(36)" +
-                ")");
+                " password varchar(36)," +
+                " idcard varchar(36) )");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS verlist (_id integer primary key autoincrement," +
                 //验证码
@@ -44,9 +44,9 @@ public class DBManager {
         try {
             db.execSQL("INSERT INTO user VALUES( ?, ?, ?, ?)", new Object[]{user.getId(),
                     user.getName(), user.getPhone(), user.getPassword()});
-            db.setTransactionSuccessful();  //设置事务成功完成
+            db.setTransactionSuccessful();//设置事务成功完成
         } finally {
-            db.endTransaction();    //结束事务
+            db.endTransaction();//结束事务
         }
     }
     /**
@@ -105,7 +105,7 @@ public class DBManager {
      * @param name 用户名
      * @return
      */
-    public void insert(String name,String phone,String pwd){
+    public void insert(String name,String phone,String pwd,String idcard){
 
         db.execSQL("DELETE FROM user");
         //实例化常量值
@@ -116,6 +116,8 @@ public class DBManager {
         cValue.put("phone",phone);
         //添加密码
         cValue.put("password",pwd);
+        //添加身份证号
+        cValue.put("idcard",idcard);
         //调用insert()方法插入数据
         db.insert("user",null,cValue);
     }
@@ -156,7 +158,7 @@ public class DBManager {
         db.insert("verlist",null,cValue);
     }
     /**
-     * 查询验证码
+     * 查询验证码列表
      * @return
      */
     public List<String> queryVer(){
@@ -166,5 +168,30 @@ public class DBManager {
             verlist.add(c.getString(c.getColumnIndex("vercode")));
         }
         return verlist;
+    }
+
+    /**
+     * 查询身份证号
+     * @param phone
+     * @return
+     */
+    public String queryIdcard(String phone) {
+        String idcard = null;
+        Cursor c = db.rawQuery("SELECT idcard FROM user where phone == ? ",new String[]{phone});
+        while (c.moveToNext()) {
+            idcard = c.getString(c.getColumnIndex("idcard"));
+        }
+        return idcard;
+    }
+    /**
+     * 修改密码
+     * @param phone
+     */
+    public void updatePwd(String phone,String password) {
+
+        ContentValues cv = new ContentValues();
+        cv.put("password", password);
+        db.update("user", cv, "phone = ?", new String[]{phone});
+
     }
 }

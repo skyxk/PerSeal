@@ -57,7 +57,7 @@
         android:id="@+id/button3"
         android:layout_width="150dp"
         android:layout_height="47dp"
-        android:text="注销"
+        android:text="修改密码"
         android:textColor="#fbfbfc"
         android:background="#e60624"
         app:layout_constraintBottom_toBottomOf="parent"

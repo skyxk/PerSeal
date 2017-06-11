@@ -7,6 +7,7 @@ package com.clt.perseal.Constants;
 public class Constants {
     public static final String TAG = "SQLite";
     public static final String SYS = "System";
+    //webview 访问地址前缀
     public static final String webUrl = "http://192.168.1.4:8080/SealCenter/";
 
 }

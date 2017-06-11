@@ -16,8 +16,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText phText ;
     private EditText pwText ;
     private EditText rePwText ;
+    private EditText idCard;
     private TextView errPwd ;
     private Button regBtn ;
+    private String idStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         phText = (EditText)findViewById(R.id.editphone);
         pwText = (EditText)findViewById(R.id.editpwd);
         rePwText = (EditText)findViewById(R.id.editrepwd);
+        idCard = (EditText)findViewById(R.id.editidcard);
         errPwd = (TextView)findViewById(R.id.texterror);
 
         errPwd.setVisibility(View.GONE);
@@ -82,11 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
                 if((pwText.getText().toString()).equals(rePwText.getText().toString())){
                     //设置提示信息不可见
                     errPwd.setVisibility(View.GONE);
+                    idStr = idCard.getText().toString();
                     String a  =(pwText.getText()).toString();
                     //注册手机号
                     DBManager db = new DBManager(RegisterActivity.this);
                     db.insert("", (phText.getText()).toString(),
-                            SimpleDesede.encryptToDB((pwText.getText()).toString()));
+                            SimpleDesede.encryptToDB((pwText.getText()).toString()),idStr);
                     //转到登录页面
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     intent.putExtra("phone",(phText.getText()).toString());

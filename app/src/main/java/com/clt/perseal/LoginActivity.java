@@ -53,10 +53,14 @@ public class LoginActivity extends Activity {
         deBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBManager DBManager = new DBManager(LoginActivity.this);
-                DBManager.deleteAll();
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+//                DBManager DBManager = new DBManager(LoginActivity.this);
+//                DBManager.deleteAll();
+//                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+//                startActivity(intent);
+                  //跳转身份验证
+                  Intent intent = new Intent(LoginActivity.this, IdCardActivity.class);
+                  intent.putExtra("phone",phone);
+                  startActivity(intent);
             }
         });
         lgBtn.setOnClickListener(new View.OnClickListener() {
