@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clt.perseal.Util.DBManager;
@@ -15,6 +16,7 @@ public class IdCardActivity extends AppCompatActivity {
     private String phone;
     private String Idcard;
     private EditText IdCardText;
+    private TextView quesText;
     private Button nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,22 +25,27 @@ public class IdCardActivity extends AppCompatActivity {
         Intent in = getIntent();
         phone = in.getStringExtra("phone");
         db = new DBManager(IdCardActivity.this);
-        //获取输入的身份证号
+        //获取输入答案
         IdCardText = (EditText)findViewById(R.id.IdCardText);
+        quesText = (TextView)findViewById(R.id.questView);
+
+        quesText.setText(db.queryQuestion(phone)+":");
         //获取按钮
         nextBtn = (Button)findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Idcard = IdCardText.getText().toString();
-                if(Idcard.equals(db.queryIdcard(phone))){
+                if(Idcard.equals(db.queryAnswer(phone))){
+
                     //跳转身份验证
                     Intent intent = new Intent(IdCardActivity.this, changePwdActivity.class);
                     intent.putExtra("phone",phone);
                     startActivity(intent);
+                    finish();
                 }else{
                     //提示输入错误
-                     Toast.makeText(IdCardActivity.this, "身份证号输入错误",Toast.LENGTH_SHORT).show();//显示信息;
+                     Toast.makeText(IdCardActivity.this, "密保答案输入错误",Toast.LENGTH_SHORT).show();//显示信息;
                 }
             }
         });

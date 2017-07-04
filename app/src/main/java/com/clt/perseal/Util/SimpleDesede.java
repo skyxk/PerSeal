@@ -65,8 +65,6 @@ public class SimpleDesede {
         }
         return key;
     }
-    
-//
 
     // 3des加密 base64
     public static String encryptToDB(String sealItem) {

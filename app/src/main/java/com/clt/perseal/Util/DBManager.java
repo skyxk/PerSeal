@@ -27,7 +27,9 @@ public class DBManager {
         db.execSQL("CREATE TABLE IF NOT EXISTS user (_id integer primary key autoincrement," +
                 " name varchar(36)," +
                 " phone varchar(20)," +
-                " password varchar(36)," +
+                " password varchar(36), " +
+                " question varchar(36), " +
+                " answer varchar(36)," +
                 " idcard varchar(36) )");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS verlist (_id integer primary key autoincrement," +
@@ -105,7 +107,7 @@ public class DBManager {
      * @param name 用户名
      * @return
      */
-    public void insert(String name,String phone,String pwd,String idcard){
+    public void insert(String name,String phone,String pwd,String idcard,String question,String answer){
 
         db.execSQL("DELETE FROM user");
         //实例化常量值
@@ -116,6 +118,10 @@ public class DBManager {
         cValue.put("phone",phone);
         //添加密码
         cValue.put("password",pwd);
+        //添加密保问题
+        cValue.put("question",question);
+        //添加密保答案
+        cValue.put("answer",answer);
         //添加身份证号
         cValue.put("idcard",idcard);
         //调用insert()方法插入数据
@@ -163,7 +169,7 @@ public class DBManager {
      */
     public List<String> queryVer(){
         List<String> verlist = new ArrayList<String>() ;
-        Cursor c = db.rawQuery("SELECT vercode FROM verlist order by _id DESC ",null);
+        Cursor c = db.rawQuery("SELECT vercode FROM verlist ",null);
         while (c.moveToNext()) {
             verlist.add(c.getString(c.getColumnIndex("vercode")));
         }
@@ -182,6 +188,32 @@ public class DBManager {
             idcard = c.getString(c.getColumnIndex("idcard"));
         }
         return idcard;
+    }
+    /**
+     * 查询密保问题
+     * @param phone
+     * @return
+     */
+    public String queryQuestion(String phone) {
+        String question = null;
+        Cursor c = db.rawQuery("SELECT question FROM user where phone == ? ",new String[]{phone});
+        while (c.moveToNext()) {
+            question = c.getString(c.getColumnIndex("question"));
+        }
+        return question;
+    }
+    /**
+     * 查询密保答案
+     * @param phone
+     * @return
+     */
+    public String queryAnswer(String phone) {
+        String answer = null;
+        Cursor c = db.rawQuery("SELECT answer FROM user where phone == ? ",new String[]{phone});
+        while (c.moveToNext()) {
+            answer = c.getString(c.getColumnIndex("answer"));
+        }
+        return answer;
     }
     /**
      * 修改密码

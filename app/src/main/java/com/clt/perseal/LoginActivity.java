@@ -6,18 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
-import android.widget.AutoCompleteTextView;
+
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+
 import android.widget.TextView;
 
 
-import com.clt.perseal.Util.Base64Utils;
+
 import com.clt.perseal.Util.DBManager;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -61,6 +59,7 @@ public class LoginActivity extends Activity {
                   Intent intent = new Intent(LoginActivity.this, IdCardActivity.class);
                   intent.putExtra("phone",phone);
                   startActivity(intent);
+                  finish();
             }
         });
         lgBtn.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +75,13 @@ public class LoginActivity extends Activity {
                         Intent intent_1 = new Intent(LoginActivity.this, MainActivity.class);
 //                        intent_1.putExtra("phone",phone);
                         startActivity(intent_1);
+                        finish();
                     }else{
                         //未激活 转至激活页面
                         Intent intent_2 = new Intent(LoginActivity.this, ActivateActivity.class);
 //                        intent_2.putExtra("phone",phone);
                         startActivity(intent_2);
+                        finish();
                     }
                 }else{
                     errorText.setVisibility(View.VISIBLE);

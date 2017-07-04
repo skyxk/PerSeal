@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 
-import com.clt.perseal.Util.Base64Utils;
 import com.clt.perseal.Util.DBManager;
 
 
@@ -32,7 +31,6 @@ public class WelcomeActivity extends Activity {
                 String phone = DBManager.queryPhone();
                 if(phone==null){
                     Intent intent_1 = new Intent(WelcomeActivity.this, RegisterActivity.class);
-
                     startActivity(intent_1);
                 }else{
                     Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
@@ -41,6 +39,6 @@ public class WelcomeActivity extends Activity {
                 }
                 WelcomeActivity.this.finish();
             }
-        }, 2000);
+        }, 1000);
     }
 }

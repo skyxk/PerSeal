@@ -1,40 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/open"
     tools:context="com.clt.perseal.IdCardActivity">
 
-    <EditText
-        android:id="@+id/IdCardText"
-        android:layout_width="261dp"
-        android:layout_height="39dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="输入身份证号进行验证"
-        android:textColor="#a6a0a0"
-        android:background="@drawable/text_view_borde1r"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/nextBtn"
-        app:layout_constraintVertical_bias="0.774"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/nextBtn"
-        android:layout_width="116dp"
-        android:layout_height="46dp"
-        android:text="下一步"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="279dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.498" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:id="@+id/tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进行密码问题验证"
+            android:textSize="20dp"
+            android:textColor="#5e5e63" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/questView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的身份证号:"
+            android:textSize="17sp"
+            android:textColor="#5e5e63" />
+        <EditText
+            android:id="@+id/IdCardText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="输入答案" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="下一步"
+            android:background="@drawable/bg_edittext_normal" />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

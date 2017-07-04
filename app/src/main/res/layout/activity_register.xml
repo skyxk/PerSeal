@@ -1,143 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+    android:background="@drawable/open"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     tools:context="com.clt.perseal.RegisterActivity">
-
     <TextView
-        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="手机号："
-        android:textColor="#e3e6e9"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="160dp"
-        app:layout_constraintRight_toLeftOf="@+id/editphone"
-        android:layout_marginRight="8dp" />
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editphone"
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="手 机 号：" />
+
+        <EditText
+            android:id="@+id/editphone"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:maxLength="11"
+            android:hint="请输入手机号"
+            android:inputType="phone"
+            android:text="" />
+        </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:maxLength="11"
-        android:hint="请输入手机号"
-        android:textColor="#e3e6e9"
-        android:inputType="phone"
-        android:text=""
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="34dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="密    码：" />
 
+        <EditText
+            android:id="@+id/editpwd"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="确认密码：" />
+
+            <EditText
+                android:id="@+id/editrepwd"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="请输入再次密码"
+                android:inputType="textPassword" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/texterror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="两次输入密码不一致"
+                android:textColor="#da0707"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="密保问题：" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="您的答案：" />
+        <EditText
+            android:id="@+id/editanswer"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </LinearLayout>
     <TextView
-        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="密 码："
-        android:textColor="#e3e6e9"
-        android:textSize="20dp"
-        app:layout_constraintRight_toLeftOf="@+id/editpwd"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="26dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        android:layout_gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/editpwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="请输入密码"
-        android:textColor="#e3e6e9"
-        android:inputType="textPassword"
-        android:layout_marginTop="11dp"
-        app:layout_constraintTop_toBottomOf="@+id/editphone"
-        android:layout_marginRight="34dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/regBtn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="注册"
+            android:background="@drawable/bg_edittext_normal" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="确认密码："
-        android:textColor="#e3e6e9"
-        android:textSize="20dp"
-        app:layout_constraintRight_toLeftOf="@+id/editrepwd"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="34dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <EditText
-        android:id="@+id/editrepwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="请输入再次密码"
-        android:textColor="#e3e6e9"
-        android:inputType="textPassword"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/editpwd"
-        android:layout_marginRight="34dp"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <Button
-        android:id="@+id/regBtn"
-        android:layout_width="161dp"
-        android:layout_height="46dp"
-        android:text="注册"
-        android:textColor="#e3e6e9"
-        android:background="#4db428"
-        android:layout_marginRight="88dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="137dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.844"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-    <TextView
-        android:id="@+id/texterror"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="两次输入密码不一致"
-        android:textColor="#da0707"
-        android:textSize="12dp"
-        android:layout_marginTop="-10dp"
-        app:layout_constraintTop_toBottomOf="@+id/editrepwd"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="HardcodedText" />
-
-    <EditText
-        android:id="@+id/editidcard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="请输入身份证号"
-        android:layout_marginTop="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/editrepwd"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="@+id/editrepwd" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="100dp"
-        android:layout_height="27dp"
-        android:text="身份证号："
-        android:textColor="#e3e6e9"
-
-        android:textSize="20dp"
-        app:layout_constraintRight_toLeftOf="@+id/editidcard"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="41dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</LinearLayout>

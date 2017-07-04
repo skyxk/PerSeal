@@ -28,9 +28,11 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ActivateActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/activatelabel" />
         <activity
             android:name=".ApplicationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/application" />
         <activity
             android:name=".LookVerActivity"

@@ -23,17 +23,16 @@ public class LookVerActivity extends AppCompatActivity {
         List<String> verlist = db.queryVer();
         //生成动态数组，并且转载数据
         ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
+
         for(int i=0;i<verlist.size();i++)
         {
             HashMap<String, String> map = new HashMap<String, String>();
-
-//            map.put("textView2", "验证码"+(i+1));
-
-            map.put("ItemText", verlist.get(i));
+            map.put("ItemText", verlist.get(verlist.size()-1-i));
             mylist.add(map);
-            if(i==5){
+            if(mylist.size()>4){
                 break;
             }
+
         }
         //生成适配器，数组===》ListItem
         SimpleAdapter mSchedule = new SimpleAdapter(this, //没什么解释
@@ -41,7 +40,6 @@ public class LookVerActivity extends AppCompatActivity {
                 R.layout.vercode_list,//ListItem的XML实现
                 //动态数组与ListItem对应的子项
                 new String[] {"ItemText"},
-
                 //ListItem的XML文件里面的两个TextView ID
                 new int[] {R.id.ItemText});
 

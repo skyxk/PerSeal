@@ -1,66 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/open"
+    android:orientation="vertical"
     tools:context="com.clt.perseal.changePwdActivity">
-
-    <EditText
-        android:id="@+id/changePwdText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberPassword"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="请输入新密码"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/changeRePwdText"
-        app:layout_constraintVertical_bias="0.947"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <EditText
-        android:id="@+id/changeRePwdText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="再次输入新密码"
-        android:inputType="numberPassword"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/changePwdBtn"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <Button
-        android:id="@+id/changePwdBtn"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
-        android:text="修改密码"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="243dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
     <TextView
-        android:id="@+id/errortext1"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp" />
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="两次输入的密码不同"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="@+id/changeRePwdText"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/changeRePwdText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="@+id/changeRePwdText"
-        android:layout_marginTop="43dp" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/changePwdText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="请输入新密码" />
 
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/changeRePwdText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="再次输入新密码"
+            android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/errortext1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ec042b"
+            android:text="两次输入的密码不同" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/changePwdBtn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext_normal"
+            android:text="修改密码" />
+
+    </LinearLayout>
+
+</LinearLayout>

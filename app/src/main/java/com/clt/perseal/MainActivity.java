@@ -18,6 +18,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.clt.perseal.Constants.Constants;
 import com.clt.perseal.Util.DBHelper;
@@ -28,12 +29,15 @@ public class MainActivity extends AppCompatActivity
     public SQLiteDatabase db = null;
     public DBHelper dbHelper =null;
     public WebView webView = null;
+    public TextView headPhone = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
+//        headPhone = (TextView)headerLayout.findViewById(R.id.textView);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 ////        fab.setVisibility();
@@ -102,6 +106,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        DBManager DBManager = new DBManager(MainActivity.this);
+        String phong =  DBManager.queryPhone();
+        headPhone = (TextView) findViewById(R.id.textView);
+        headPhone.setText(phong);
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_gallery) {
