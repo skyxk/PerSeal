@@ -40,5 +40,6 @@ public class WelcomeActivity extends Activity {
                 WelcomeActivity.this.finish();
             }
         }, 1000);
+        /////////////////////
     }
 }
