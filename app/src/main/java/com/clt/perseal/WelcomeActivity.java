@@ -41,4 +41,9 @@ public class WelcomeActivity extends Activity {
             }
         }, 1000);
     }
+
+
+
+
+
 }
