@@ -1,5 +1,7 @@
 package com.clt.perseal;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
@@ -8,8 +10,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.clt.perseal.Constants.Constants;
-import com.clt.perseal.Util.Base64Utils;
-import com.clt.perseal.Util.DBManager;
+import com.clt.perseal.Dao.VerCodeDao;
+import com.clt.perseal.Dto.VerCodeDto;
 
 public class ApplicationActivity extends AppCompatActivity {
     public WebView webView = null;
@@ -56,9 +58,20 @@ public class ApplicationActivity extends AppCompatActivity {
 
         //供H5页面调用
         public void insertVer(String ver){
-            //创建MyDatabaseUtil对象
-            DBManager DBManager = new DBManager(ApplicationActivity.this);
-            DBManager.insertVer(ver);
+            //获取当前手机号
+            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            String phone = preferences.getString("phone", null);
+            VerCodeDao verDao = new VerCodeDao(ApplicationActivity.this);
+            VerCodeDto verDto = new VerCodeDto();
+            verDto.setPhone(phone);
+            verDto.setVercode(ver);
+            //添加验证码
+            verDao.addVerCode(verDto);
+        }
+        @JavascriptInterface
+        public String getPhone(){
+            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            return preferences.getString("phone", null);
         }
     }
 }

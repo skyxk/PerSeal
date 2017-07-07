@@ -1,5 +1,7 @@
 package com.clt.perseal;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
@@ -52,6 +54,12 @@ public class ActivateActivity extends AppCompatActivity {
             DBManager DBManager = new DBManager(ActivateActivity.this);
 //            DBManager.insert(name,phone,pwd);
 //            dbHelper.insert("chen123","13261583005");
+        }
+        @JavascriptInterface
+        public String getPhone(){
+            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            return preferences.getString("phone", null);
+
         }
     }
 }

@@ -2,94 +2,132 @@ package com.clt.perseal;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.TextView;
+import android.widget.Toast;
 
-
-
-import com.clt.perseal.Util.DBManager;
-
-
-
+import com.clt.perseal.Dao.UnitDao;
+import com.clt.perseal.Dto.UnitDto;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity {
-
+    private Button mLgbtn;
+    private Button mChgebtn;
+    private Button mRgrbtn;
     private String phone;
     private String password;
+    private EditText mPhoneView;
     private EditText mPasswordView;
-    private  TextView errorText;
+    private TextView errorText;
+    private UnitDao unitDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //获取手机号
-        Intent itt = getIntent();
 
-        //本地手机号
-        phone = itt.getStringExtra("phone");
+        initView();
 
-//      初始化
+        initDate();
+
+    }
+
+    /**
+     * 初始化view
+     */
+    public void initView(){
+
+        mPhoneView = (EditText) findViewById(R.id.phone);
+
+        mPasswordView = (EditText) findViewById(R.id.password);
+
         errorText = (TextView)findViewById(R.id.errortext);
-        errorText.setVisibility(View.GONE);
-        TextView phText = (TextView)findViewById(R.id.phonetext);
-        phText.setText(phone);
+
         //登录
-        Button lgBtn = (Button)findViewById(R.id.email_sign_in_button);
-        //注销
-        Button deBtn = (Button)findViewById(R.id.button3);
-        deBtn.setOnClickListener(new View.OnClickListener() {
+        mLgbtn = (Button)findViewById(R.id.login_btn);
+
+        //修改密码
+        mChgebtn = (Button)findViewById(R.id.change_pwd_btn);
+
+        //注册
+        mRgrbtn = (Button)findViewById(R.id.register_btn);
+
+        mLgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DBManager DBManager = new DBManager(LoginActivity.this);
-//                DBManager.deleteAll();
-//                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-//                startActivity(intent);
-                  //跳转身份验证
-                  Intent intent = new Intent(LoginActivity.this, IdCardActivity.class);
-                  intent.putExtra("phone",phone);
-                  startActivity(intent);
-                  finish();
-            }
-        });
-        lgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPasswordView = (EditText) findViewById(R.id.password);
+
+                phone = mPhoneView.getText().toString();
+
                 password = mPasswordView.getText().toString();
-                DBManager DBManager = new DBManager(LoginActivity.this);
-                if(password.equals(DBManager.check(phone))){
-                    //密码正确，手机号是否激活
-                    if(true){
-                        //已激活 转至主页面
+
+                unitDao = new UnitDao(LoginActivity.this);
+                UnitDto unit = unitDao.queryUnit(phone);
+                if(!"".equals(phone)){
+                    if(password.equals(unit.getPassword())){
+                        //保存登录信息
+                        savePhone(phone);
+                        //跳转进入程序
                         Intent intent_1 = new Intent(LoginActivity.this, MainActivity.class);
-//                        intent_1.putExtra("phone",phone);
+                        intent_1.putExtra("phone",phone);
                         startActivity(intent_1);
                         finish();
-                    }else{
-                        //未激活 转至激活页面
-                        Intent intent_2 = new Intent(LoginActivity.this, ActivateActivity.class);
-//                        intent_2.putExtra("phone",phone);
-                        startActivity(intent_2);
-                        finish();
+                    }else {
+                        errorText.setVisibility(View.VISIBLE);
                     }
                 }else{
-                    errorText.setVisibility(View.VISIBLE);
+                    Toast.makeText(LoginActivity.this,"请填写手机号",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        mChgebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转密保问题页面
+                Intent intent = new Intent(LoginActivity.this, SecretVerifyActivity.class);
+                intent.putExtra("phone",phone);
+                startActivity(intent);
+                finish();
+            }
+        });
+        mRgrbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转注册页面
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
+    /**
+     * 初始化date
+     */
+    public void initDate(){
+        errorText.setVisibility(View.GONE);
+//        mPhoneView.setText(phone);
+    }
+
+    public void savePhone(String phone){
+
+        //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
+        SharedPreferences preferences = this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+        //取到编辑器
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("phone", phone);
+        //把数据提交给文件中
+        editor.commit();
+
+    }
 
 }
 

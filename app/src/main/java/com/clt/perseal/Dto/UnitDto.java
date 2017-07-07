@@ -9,7 +9,8 @@ public class UnitDto {
     private String name;
     private String phone;
     private String password;
-
+    private String question;
+    private String answer;
 
     public String getId() {
         return id;
@@ -43,4 +44,19 @@ public class UnitDto {
         this.password = password;
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

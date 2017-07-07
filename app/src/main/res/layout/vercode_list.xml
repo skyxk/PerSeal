@@ -9,7 +9,20 @@
     android:id="@+id/MyListItem"
     android:paddingBottom="3dip"
     android:paddingLeft="10dip">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="手机号：" />
 
+    <TextView
+        android:id="@+id/ItemText_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -19,7 +32,7 @@
         android:text="验证码：" />
 
     <TextView
-        android:id="@+id/ItemText"
+        android:id="@+id/ItemText_vercode"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:gravity="center"

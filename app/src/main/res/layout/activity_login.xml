@@ -56,11 +56,11 @@
                 android:layout_gravity="center_vertical"
                 android:text="手  机："
                 android:textSize="20sp"/>
-            <TextView
-                android:id="@+id/phonetext"
+            <EditText
+                android:id="@+id/phone"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="13261583005"
+                android:text=""
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 />
@@ -112,7 +112,7 @@
         android:orientation="vertical"
         >
         <Button
-            android:id="@+id/email_sign_in_button"
+            android:id="@+id/login_btn"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_edittext_normal"
@@ -123,12 +123,23 @@
             android:layout_width="wrap_content"
             android:layout_height="5dp" />
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/change_pwd_btn"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_edittext_focused"
             android:textSize="18dp"
             android:text="修改密码"
+            android:textColor="#f90b0b0b" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="5dp" />
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext_normal"
+            android:textSize="18dp"
+            android:text="注  册"
             android:textColor="#f90b0b0b" />
     </LinearLayout>
 

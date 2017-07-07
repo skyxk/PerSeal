@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="查看验证码" />
         <item
+            android:id="@+id/nav_temporary"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="临时授权" />
+        <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
             android:title="使用说明" />

@@ -28,12 +28,12 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ActivateActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/activatelabel" />
+            android:label="@string/activatelabel"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ApplicationActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/application" />
+            android:label="@string/application"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LookVerActivity"
             android:label="@string/lookvercode" />
@@ -48,7 +48,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".changePwdActivity" />
-        <activity android:name=".IdCardActivity"></activity>
+        <activity android:name=".SecretVerifyActivity" />
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".TemporaryActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
