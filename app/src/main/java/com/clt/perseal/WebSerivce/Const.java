@@ -7,7 +7,7 @@ package com.clt.perseal.WebSerivce;
 public class Const {
     public class WSConst {
         public class t01 {
-            public static final String URL="http://192.168.1.111:8080/SealCenter/ws/mycxf";
+            public static final String URL="http://10.88.4.102/SealCenter/ws/mycxf";
 //            public static final String URL="http://10.88.4.102:80/SealCenter/ws/mycxf";
             //命名空间
             public static final String nameSpace="http://service.esign.cn/";

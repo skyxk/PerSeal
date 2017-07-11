@@ -45,12 +45,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        //输出更新数据库的日志信息
-        Log.i(Constants.TAG, "pdate Database------------->");
-
 //        if (oldVersion==1 && newVersion==2) {//升级判断,如果再升级就要再加两个判断,从1到3,从2到3
 //            db.execSQL("ALTER TABLE restaurants ADD phone TEXT;");
 //        }
     }
-
 }

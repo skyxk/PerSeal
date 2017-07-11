@@ -22,5 +22,4 @@ public class AccountActivity extends AppCompatActivity {
 
     }
 
-
 }

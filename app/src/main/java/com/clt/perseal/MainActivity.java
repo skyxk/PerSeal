@@ -1,22 +1,30 @@
 package com.clt.perseal;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.clt.perseal.Constants.Constants;
@@ -27,6 +35,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public WebView webView = null;
     public TextView headPhone = null;
+    private View mErrorView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +70,18 @@ public class MainActivity extends AppCompatActivity
         //WebView加载web资源
         webView.loadUrl(url);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                CharSequence pnotfound = "404";
+                if (title.contains(pnotfound)) {
+                    view.stopLoading();
+                    view.loadUrl("file:///android_asset/error.html");
+                }
+            }
+
+        });
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -69,12 +90,20 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
 
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-            //页面加载结束后可执行
-//
-//            }
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                // Handle the error
+                view.loadUrl("file:///android_asset/error.html");
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                //页面加载结束后可执行
+
+            }
         });
     }
 
@@ -85,8 +114,28 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this).setTitle("确认退出吗？")
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 点击“确认”后的操作
+                            MainActivity.this.finish();
+
+                        }
+                    })
+                    .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 点击“返回”后的操作,这里不设置没有任何操作
+                        }
+                    }).show();
+//            super.onBackPressed();
         }
+
+
     }
 
     @Override
@@ -104,15 +153,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            //跳转激活
-            Intent intent = new Intent(MainActivity.this, AccountActivity.class);
-            Bundle bundle = new Bundle();
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
+//        if (id == R.id.action_settings) {
+//            //跳转激活
+//            Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+//            Bundle bundle = new Bundle();
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -146,17 +195,28 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent_3);
 
         } else if (id == R.id.nav_temporary) {
-            //跳转验证码查看
+
             Intent intent_4 = new Intent(MainActivity.this, TemporaryActivity.class);
             Bundle bundle_4 = new Bundle();
-            intent_4.putExtras(intent_4);
+            intent_4.putExtras(bundle_4);
             startActivity(intent_4);
 
         } else if (id == R.id.nav_share) {
-
+            Intent intent_5 = new Intent(MainActivity.this, EditPswActivity.class);
+            Bundle bundle_5 = new Bundle();
+            intent_5.putExtras(bundle_5);
+            startActivity(intent_5);
 
         } else if (id == R.id.nav_send) {
+            //清楚SharedPreferences的登录信息
+            SharedPreferences preferences = this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            preferences.edit().clear().commit();
 
+//            Intent intent_6 = new Intent(MainActivity.this, LoginActivity.class);
+//            Bundle bundle_6 = new Bundle();
+//            intent_6.putExtras(bundle_6);
+//            startActivity(intent_6);
+            finish();
 
         }
 
@@ -164,6 +224,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     class JSInterface1 {
         @JavascriptInterface
 

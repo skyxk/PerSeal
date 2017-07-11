@@ -14,7 +14,7 @@
             android:title="申请印章" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="查看验证码" />
         <item
             android:id="@+id/nav_temporary"
@@ -23,11 +23,11 @@
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
-            android:title="使用说明" />
+            android:title="签章密码修改" />
         <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_menu_send"
-            android:title="关于我们" />
+            android:title="退出" />
 
     </group>
 

@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        unitDao = new UnitDao(LoginActivity.this);
         initView();
 
         initDate();
@@ -68,7 +68,7 @@ public class LoginActivity extends Activity {
 
                 password = mPasswordView.getText().toString();
 
-                unitDao = new UnitDao(LoginActivity.this);
+
                 UnitDto unit = unitDao.queryUnit(phone);
                 if(!"".equals(phone)){
                     if(password.equals(unit.getPassword())){
@@ -113,6 +113,16 @@ public class LoginActivity extends Activity {
      * 初始化date
      */
     public void initDate(){
+
+        UnitDto unit = unitDao.queryOnlyUnit();
+        if(unit.getPhone()!=null){
+            mPhoneView.setText(unit.getPhone());
+            mPhoneView.setEnabled(false);
+            mRgrbtn.setVisibility(View.GONE);
+        }else{
+
+        }
+
         errorText.setVisibility(View.GONE);
 //        mPhoneView.setText(phone);
     }
@@ -126,7 +136,6 @@ public class LoginActivity extends Activity {
         editor.putString("phone", phone);
         //把数据提交给文件中
         editor.commit();
-
     }
 
 }

@@ -82,6 +82,25 @@ public class UnitDao {
         }
         return unit;
     }
+    /**
+     * 查询unit
+     * @return UnitDto
+     */
+    public UnitDto queryOnlyUnit(){
+
+        UnitDto unit = new UnitDto();
+        Cursor c = db.query("unit",
+                null,null, null,
+                null,null,null);
+        while (c.moveToNext()) {
+            unit.setName(c.getString(c.getColumnIndex("name")));
+            unit.setPhone(c.getString(c.getColumnIndex("phone")));
+            unit.setPassword(SimpleDesede.decryptFromDB(c.getString(c.getColumnIndex("password"))));
+            unit.setQuestion(c.getString(c.getColumnIndex("question")));
+            unit.setAnswer(SimpleDesede.decryptFromDB(c.getString(c.getColumnIndex("answer"))));
+        }
+        return unit;
+    }
 
 
     /**

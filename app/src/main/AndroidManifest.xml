@@ -50,7 +50,10 @@
         <activity android:name=".changePwdActivity" />
         <activity android:name=".SecretVerifyActivity" />
         <activity android:name=".AccountActivity" />
-        <activity android:name=".TemporaryActivity"
+        <activity
+            android:name=".TemporaryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditPswActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
