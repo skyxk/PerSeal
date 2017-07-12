@@ -37,9 +37,10 @@ public class ActivateActivity extends AppCompatActivity {
 
         returnvalue = WsControler.isActivateByPhone(preferences.getString("phone", null));
 
-        if(returnvalue.equals("ESSRET:0")){
+        if("ESSRET:0".equals(returnvalue)){
 
-        }else if(returnvalue.equals("ESSRET:1")){
+
+        }else if("ESSRET:1".equals(returnvalue)){
 
             new AlertDialog.Builder(ActivateActivity.this).setTitle("您的手机号已经激活")//设置对话框标题
                     .setMessage("不能再次激活")//设置显示的内容
@@ -61,7 +62,7 @@ public class ActivateActivity extends AppCompatActivity {
     }
 
     private void initWebView(String url) {
-        webView = (WebView) findViewById(R.id.webView1);
+        webView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);

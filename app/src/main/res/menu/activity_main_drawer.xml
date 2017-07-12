@@ -10,19 +10,27 @@
             android:title="身份激活" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="申请印章" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="查看验证码" />
+            android:title="查看签章验证码" />
+        <item
+            android:id="@+id/nav_ver"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="查看印章下载码" />
+        <item
+            android:id="@+id/nav_showlog"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="查看签章日志" />
         <item
             android:id="@+id/nav_temporary"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="临时授权" />
         <item
             android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="签章密码修改" />
         <item
             android:id="@+id/nav_send"

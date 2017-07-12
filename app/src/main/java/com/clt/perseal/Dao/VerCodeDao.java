@@ -60,13 +60,13 @@ public class VerCodeDao {
      */
     public List<VerCodeDto> queryVerCodes(String phone){
         List<VerCodeDto> vercodelist = new ArrayList<VerCodeDto>();
-        VerCodeDto vercode = new VerCodeDto();
 
         Cursor c = db.query("vercodes",
                 null,"phone = ?",
                 new String[] {phone},
                 null,null,null);
         while (c.moveToNext()) {
+            VerCodeDto vercode = new VerCodeDto();
             vercode.setPhone(c.getString(c.getColumnIndex("phone")));
             vercode.setVercode(SimpleDesede.decryptFromDB(c.getString(c.getColumnIndex("vercode"))));
             vercodelist.add(vercode);

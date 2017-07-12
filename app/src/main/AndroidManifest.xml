@@ -53,7 +53,12 @@
         <activity
             android:name=".TemporaryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditPswActivity"
+        <activity
+            android:name=".EditPswActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ShowSignatureLogActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".DownloadCodeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

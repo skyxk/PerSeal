@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">签章身份管理</string>
+    <string name="app_name">签章个人终端</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -21,7 +21,7 @@
     </string>
     <string name="activatelabel">身份激活</string>
     <string name="application">申请印章</string>
-    <string name="lookvercode">查看验证码</string>
+    <string name="lookvercode">查看印章下载码</string>
     <string name="resgisterlabel">请您创建APP安全密码</string>
     <string name="ssssss">sadasdsa</string>
 </resources>

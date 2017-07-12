@@ -4,9 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.clt.perseal.Constants.Constants;
 import com.clt.perseal.Dao.VerCodeDao;
 import com.clt.perseal.Dto.VerCodeDto;
 import com.clt.perseal.Util.DBManager;
@@ -16,13 +22,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class LookVerActivity extends AppCompatActivity {
-
+    private WebView webView;
     private VerCodeDao verDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look_ver);
         verDao = new VerCodeDao(LookVerActivity.this);
+
+
 
         //绑定XML中的ListView，作为Item的容器
         ListView list = (ListView) findViewById(R.id.verList);
@@ -42,7 +50,6 @@ public class LookVerActivity extends AppCompatActivity {
             if(mylist.size()>4){
                 break;
             }
-
         }
         //生成适配器，数组===》ListItem
         SimpleAdapter mSchedule = new SimpleAdapter(this, //没什么解释

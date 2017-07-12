@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initWebView(String url) {
-        webView = (WebView) findViewById(R.id.webView1);
+        webView = (WebView) findViewById(R.id.webView5);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
@@ -187,14 +187,20 @@ public class MainActivity extends AppCompatActivity
             intent_2.putExtras(bundle_2);
             startActivity(intent_2);
 
-        } else if (id == R.id.nav_manage) {
-            //跳转验证码查看
+        } else if (id == R.id.nav_ver) {
+            //跳转下载码查看
             Intent intent_3 = new Intent(MainActivity.this, LookVerActivity.class);
             Bundle bundle_3 = new Bundle();
             intent_3.putExtras(bundle_3);
             startActivity(intent_3);
 
-        } else if (id == R.id.nav_temporary) {
+        } else if (id == R.id.nav_showlog) {
+            Intent intent_6 = new Intent(MainActivity.this, ShowSignatureLogActivity.class);
+            Bundle bundle_6 = new Bundle();
+            intent_6.putExtras(bundle_6);
+            startActivity(intent_6);
+        }
+        else if (id == R.id.nav_temporary) {
 
             Intent intent_4 = new Intent(MainActivity.this, TemporaryActivity.class);
             Bundle bundle_4 = new Bundle();
@@ -211,13 +217,14 @@ public class MainActivity extends AppCompatActivity
             //清楚SharedPreferences的登录信息
             SharedPreferences preferences = this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
             preferences.edit().clear().commit();
-
-//            Intent intent_6 = new Intent(MainActivity.this, LoginActivity.class);
-//            Bundle bundle_6 = new Bundle();
-//            intent_6.putExtras(bundle_6);
-//            startActivity(intent_6);
             finish();
-
+        }
+        else if (id == R.id.nav_manage) {
+            //验证码
+            Intent intent_7 = new Intent(MainActivity.this, DownloadCodeActivity.class);
+            Bundle bundle_7 = new Bundle();
+            intent_7.putExtras(bundle_7);
+            startActivity(intent_7);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
