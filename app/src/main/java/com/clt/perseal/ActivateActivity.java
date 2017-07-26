@@ -28,19 +28,11 @@ public class ActivateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_activate);
 
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
         preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
 
-        returnvalue = WsControler.isActivateByPhone(preferences.getString("phone", null));
+        returnvalue = preferences.getString("activiteState", null);
 
         if("ESSRET:0".equals(returnvalue)){
-
-
-        }else if("ESSRET:1".equals(returnvalue)){
 
             new AlertDialog.Builder(ActivateActivity.this).setTitle("您的手机号已经激活")//设置对话框标题
                     .setMessage("不能再次激活")//设置显示的内容
@@ -55,6 +47,10 @@ public class ActivateActivity extends AppCompatActivity {
                     finish();
                 }
             }).show();//在按键响应事件中显示此对话框
+
+        }else if("ESSRET:1".equals(returnvalue)){
+
+
         }
 
         initWebView(Constants.webUrl+"activateApp/login.jsp");
@@ -121,6 +117,18 @@ public class ActivateActivity extends AppCompatActivity {
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
 
+        }
+        @JavascriptInterface
+        public void activiteState(String state){
+
+            //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
+            SharedPreferences preferences = ActivateActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            
+            //取到编辑器
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.putString("activiteState", state);
+            //把数据提交给文件中
+            editor.commit();
         }
     }
 }

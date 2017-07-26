@@ -26,14 +26,10 @@ public class EditPswActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_psw);
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
 
         preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
 
-        returnvalue = WsControler.isActivateByPhone(preferences.getString("phone", null));
+        returnvalue = preferences.getString("activiteState", null);
 
         if("ESSRET:0".equals(returnvalue)){
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -30,12 +31,18 @@ import android.widget.TextView;
 import com.clt.perseal.Constants.Constants;
 import com.clt.perseal.Util.DBHelper;
 import com.clt.perseal.Util.DBManager;
+import com.clt.perseal.WebSerivce.WsControler;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public WebView webView = null;
     public TextView headPhone = null;
     private View mErrorView;
+
+    public SharedPreferences preferences;
+    private String returnvalue;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -234,12 +241,25 @@ public class MainActivity extends AppCompatActivity
 
 
     class JSInterface1 {
-        @JavascriptInterface
 
-        //供H5页面调用
+        //供H5页面调用手机号
+        @JavascriptInterface
         public String getPhone(){
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
+        }
+
+        //已经激活返回ESSRET:0未激活返回ESSRET:1  手机号未传入返回ESSRET:phoneIsNull
+        @JavascriptInterface
+        public void activiteState(String state){
+
+            //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
+            SharedPreferences preferences = MainActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            //取到编辑器
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.putString("activiteState", state);
+            //把数据提交给文件中
+            editor.commit();
         }
     }
 }

@@ -141,6 +141,14 @@
             android:textSize="18dp"
             android:text="注  册"
             android:textColor="#f90b0b0b" />
+        <Button
+            android:id="@+id/removed_btn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edittext_normal"
+            android:textSize="18dp"
+            android:text="注  销"
+            android:textColor="#f90b0b0b" />
     </LinearLayout>
 
 
