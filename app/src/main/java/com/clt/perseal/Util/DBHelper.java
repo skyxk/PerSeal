@@ -3,9 +3,12 @@ package com.clt.perseal.Util;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import com.clt.perseal.Constants.Constants;
+
+import java.io.File;
 
 
 /**
@@ -15,14 +18,34 @@ import com.clt.perseal.Constants.Constants;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "per.db";
     private static final int DATABASE_VERSION = 1;
-//    private static final String TABLE_NAME = "user";
-//    private static final String[] COLUMNS = {"_id","name","phone"};
-//    private SQLiteDatabase db;
+
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, getMyDatabaseName(context), null, DATABASE_VERSION);
 
     }
+    private static String getMyDatabaseName(Context context){
+        String databasename = DATABASE_NAME;
+        boolean isSdcardEnable =false;
+        String state =Environment.getExternalStorageState();
+        if(Environment.MEDIA_MOUNTED.equals(state)){//SDCard是否插入
+            isSdcardEnable = true;
+        }
+        String dbPath = null;
+        if(isSdcardEnable){
+            dbPath =Environment.getExternalStorageDirectory().getPath() +"/database/perseal/";
+        }else{//未插入SDCard，建在内存中
+            dbPath =context.getFilesDir().getPath() + "/database/perseal/";
+        }
+        File dbp = new File(dbPath);
+        if(!dbp.exists()){
+            dbp.mkdirs();
+        }
+        databasename = dbPath +DATABASE_NAME;
+
+        return databasename;
+    }
+
     //数据库被创建时调用的方法
     @Override
     public void onCreate(SQLiteDatabase db) {
