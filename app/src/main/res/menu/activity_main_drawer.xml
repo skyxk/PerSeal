@@ -15,11 +15,19 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="查看签章验证码" />
+            android:title="查看验证码" />
         <item
             android:id="@+id/nav_ver"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="查看印章下载码" />
+            android:title="查看下载码" />
+        <item
+            android:id="@+id/nav_showShareSeals"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="个人授权记录" />
+        <item
+            android:id="@+id/nav_addempnum"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="绑定专卖系统账号" />
         <item
             android:id="@+id/nav_showlog"
             android:icon="@drawable/ic_menu_gallery"

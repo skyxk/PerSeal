@@ -37,11 +37,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public WebView webView = null;
     public TextView headPhone = null;
-    private View mErrorView;
-
-    public SharedPreferences preferences;
-    private String returnvalue;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +196,13 @@ public class MainActivity extends AppCompatActivity
             intent_3.putExtras(bundle_3);
             startActivity(intent_3);
 
+        } else if (id == R.id.nav_showShareSeals) {
+            //跳转下载码查看
+            Intent intent_8 = new Intent(MainActivity.this, ShowShareSealsLoginActivity.class);
+            Bundle bundle_8 = new Bundle();
+            intent_8.putExtras(bundle_8);
+            startActivity(intent_8);
+
         } else if (id == R.id.nav_showlog) {
             Intent intent_6 = new Intent(MainActivity.this, ShowSignatureLogActivity.class);
             Bundle bundle_6 = new Bundle();
@@ -232,6 +234,13 @@ public class MainActivity extends AppCompatActivity
             Bundle bundle_7 = new Bundle();
             intent_7.putExtras(bundle_7);
             startActivity(intent_7);
+        }
+        else if (id == R.id.nav_addempnum) {
+            //验证码
+            Intent intent_9 = new Intent(MainActivity.this, AddEmpNumActivity.class);
+            Bundle bundle_9 = new Bundle();
+            intent_9.putExtras(bundle_9);
+            startActivity(intent_9);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
