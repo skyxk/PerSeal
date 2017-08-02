@@ -61,16 +61,17 @@ public class WsControler {
     }
 
 
-    public static String test(String phone){
+    public static String getAppUpdate(String appName,String appvVersion){
 
         //1  HttpTransportSE
         final HttpTransportSE httpTransportSE = new HttpTransportSE(Const.WSConst.t01.URL);
         httpTransportSE.debug=true;
 
         //2 SoapObject
-        SoapObject soapObject = new SoapObject(Const.WSConst.t01.nameSpace, Const.WSConst.t01.isActivateByPhone);
+        SoapObject soapObject = new SoapObject(Const.WSConst.t01.nameSpace, Const.WSConst.t01.getAppUpdate);
         //3  添加请求参数
-        soapObject.addProperty("arg0", phone);
+        soapObject.addProperty("arg0", appName);
+        soapObject.addProperty("arg1", appvVersion);
         //4 SoapSerializationEnvelope
         final SoapSerializationEnvelope soapSerializationEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER10);
         soapSerializationEnvelope.bodyOut=soapObject;
@@ -78,35 +79,19 @@ public class WsControler {
         soapSerializationEnvelope.dotNet= false;//这里如果设置为TRUE,那么在服务器端将获取不到参数值(如:将这些数据插入到数据库中的话)
 
         //线程接口
-        FutureTask<String> futureTask = new FutureTask<String>(new Callable<String>() {
-
-            @Override
-            public String call() throws Exception {
-                String returnvalue="";
-                // 调用  //Const.WSConst.t01.nameSpace+Const.WSConst.t01.test_mathName
-                httpTransportSE.call(null, soapSerializationEnvelope);
-                // 获取返回信息
-                if(soapSerializationEnvelope.getResponse()!=null){
-                    SoapPrimitive primitive =  (SoapPrimitive) soapSerializationEnvelope.getResponse();
-                    Log.d(Tag, primitive.toString()+"");
-                    returnvalue=primitive.toString();
-                }
-                return returnvalue;
-            }
-        });
-
-        //开启线程
-        new Thread(futureTask).start();
-
         try {
-            //线程完成回调
-            return futureTask.get();
-        } catch (InterruptedException | ExecutionException e) {
-
+            // 调用WebService
+            httpTransportSE.call(null, soapSerializationEnvelope);
+            String returnvalue ="";
+            if(soapSerializationEnvelope.getResponse()!=null){
+                SoapPrimitive primitive =  (SoapPrimitive) soapSerializationEnvelope.getResponse();
+                Log.d(Tag, primitive.toString()+"");
+                returnvalue=primitive.toString();
+            }
+            return  returnvalue;
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
-
         return null;
 
     }
