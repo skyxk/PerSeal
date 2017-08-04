@@ -242,7 +242,13 @@ public class MainActivity extends AppCompatActivity
             intent_9.putExtras(bundle_9);
             startActivity(intent_9);
         }
-
+        else if (id == R.id.nav_sharesealsLog) {
+            //验证码
+            Intent intent_10 = new Intent(MainActivity.this, ShowShareSealsLogActivity.class);
+            Bundle bundle_10 = new Bundle();
+            intent_10.putExtras(bundle_10);
+            startActivity(intent_10);
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -257,11 +263,9 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
         }
-
         //已经激活返回ESSRET:0未激活返回ESSRET:1  手机号未传入返回ESSRET:phoneIsNull
         @JavascriptInterface
         public void activiteState(String state){
-
             //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
             SharedPreferences preferences = MainActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
             //取到编辑器
