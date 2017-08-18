@@ -22,6 +22,7 @@ import com.clt.perseal.Dto.UnitDto;
 import com.clt.perseal.Util.Base64Utils;
 import com.clt.perseal.Util.DBManager;
 import com.clt.perseal.Util.SimpleDesede;
+import com.clt.perseal.Util.UpdateUtil;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText phText ;
@@ -53,6 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
         initView();
 
         initDate();
+
+        new UpdateUtil(RegisterActivity.this).Update();
 
     }
     /**

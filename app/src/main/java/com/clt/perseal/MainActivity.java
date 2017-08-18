@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity
     public WebView webView = null;
     public TextView headPhone = null;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +125,9 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // 点击“确认”后的操作
-                            MainActivity.this.finish();
+//                            MainActivity.this.finish();
+                            android.os.Process.killProcess(android.os.Process.myPid()); //获取PID
+                            System.exit(0);
 
                         }
                     })
@@ -175,28 +179,42 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_gallery) {
-            //跳转激活
-            Intent intent = new Intent(MainActivity.this, ActivateActivity.class);
-            Bundle bundle = new Bundle();
-            intent.putExtras(bundle);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_slideshow) {
-            //跳转申请印章
-            Intent intent_2 = new Intent(MainActivity.this, ApplicationActivity.class);
-            Bundle bundle_2 = new Bundle();
-            intent_2.putExtras(bundle_2);
-            startActivity(intent_2);
-
-        } else if (id == R.id.nav_ver) {
+        if (id == R.id.nav_activate) {
+//            bundle.putString("url","login.jsp");
             //跳转下载码查看
-            Intent intent_3 = new Intent(MainActivity.this, LookVerActivity.class);
-            Bundle bundle_3 = new Bundle();
-            intent_3.putExtras(bundle_3);
-            startActivity(intent_3);
+            Intent intent_8 = new Intent(MainActivity.this, ChildWebViewActivity.class);
+            Bundle bundle_8 = new Bundle();
+            bundle_8.putString("url","activateApp/login.jsp");
+            intent_8.putExtras(bundle_8);
+            startActivity(intent_8);
+        } else if (id == R.id.nav_application) {
+            //跳转下载码查看
+            Intent intent_8 = new Intent(MainActivity.this, ApplicationActivity.class);
+            Bundle bundle_8 = new Bundle();
+            intent_8.putExtras(bundle_8);
+            startActivity(intent_8);
+//            Intent intent_8 = new Intent(MainActivity.this, ChildWebViewActivity.class);
+//            Bundle bundle_8 = new Bundle();
+//            bundle_8.putString("url","activateApp/sealApplyLogin.jsp");
+//            intent_8.putExtras(bundle_8);
+//            startActivity(intent_8);
+        } else if (id == R.id.nav_ver) {
+            //跳转验证码
+            Intent intent_8 = new Intent(MainActivity.this, ChildWebViewActivity.class);
+            Bundle bundle_8 = new Bundle();
+            bundle_8.putString("url","activateApp/showPinLogin.jsp");
+            intent_8.putExtras(bundle_8);
+            startActivity(intent_8);
 
-        } else if (id == R.id.nav_showShareSeals) {
+        }
+        else if (id == R.id.nav_manage) {
+            //验证码
+            Intent intent_7 = new Intent(MainActivity.this, LookVerActivity.class);
+            Bundle bundle_7 = new Bundle();
+            intent_7.putExtras(bundle_7);
+            startActivity(intent_7);
+        }
+        else if (id == R.id.nav_showShareSeals) {
             //跳转下载码查看
             Intent intent_8 = new Intent(MainActivity.this, ShowShareSealsLoginActivity.class);
             Bundle bundle_8 = new Bundle();
@@ -226,15 +244,10 @@ public class MainActivity extends AppCompatActivity
             //清楚SharedPreferences的登录信息
             SharedPreferences preferences = this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
             preferences.edit().clear().commit();
-            finish();
+            android.os.Process.killProcess(android.os.Process.myPid()); //获取PID
+            System.exit(0);
         }
-        else if (id == R.id.nav_manage) {
-            //验证码
-            Intent intent_7 = new Intent(MainActivity.this, DownloadCodeActivity.class);
-            Bundle bundle_7 = new Bundle();
-            intent_7.putExtras(bundle_7);
-            startActivity(intent_7);
-        }
+
         else if (id == R.id.nav_addempnum) {
             //验证码
             Intent intent_9 = new Intent(MainActivity.this, AddEmpNumActivity.class);
@@ -249,6 +262,9 @@ public class MainActivity extends AppCompatActivity
             intent_10.putExtras(bundle_10);
             startActivity(intent_10);
         }
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

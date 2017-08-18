@@ -54,7 +54,6 @@ public class ApplicationActivity extends AppCompatActivity {
                 }
             }).show();//在按键响应事件中显示此对话框
         }
-
         //初始化webview
         initWebView(Constants.webUrl+"activateApp/sealApplyLogin.jsp");
         //提供js调用
@@ -105,7 +104,8 @@ public class ApplicationActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
-
+                SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
             }
         });
     }
@@ -124,10 +124,10 @@ public class ApplicationActivity extends AppCompatActivity {
             //添加验证码
             verDao.addVerCode(verDto);
         }
-        @JavascriptInterface
-        public String getPhone(){
-            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
-            return preferences.getString("phone", null);
-        }
+//        @JavascriptInterface
+//        public String getPhone(){
+//            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+//            return preferences.getString("phone", null);
+//        }
     }
 }

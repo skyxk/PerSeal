@@ -73,7 +73,8 @@ public class ShowShareSealsLogActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
-
+                SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
             }
         });
     }

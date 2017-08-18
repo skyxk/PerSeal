@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.clt.perseal.Dao.UnitDao;
 import com.clt.perseal.Dao.VerCodeDao;
 import com.clt.perseal.Dto.UnitDto;
+import com.clt.perseal.Util.UpdateUtil;
 
 /**
  * A login screen that offers login via email/password.
@@ -42,6 +43,8 @@ public class LoginActivity extends Activity {
         initView();
 
         initDate();
+
+        new UpdateUtil(LoginActivity.this).Update();
 
     }
 
@@ -158,7 +161,6 @@ public class LoginActivity extends Activity {
         }else{
 
         }
-
         errorText.setVisibility(View.GONE);
 //        mPhoneView.setText(phone);
     }
@@ -173,5 +175,6 @@ public class LoginActivity extends Activity {
         //把数据提交给文件中
         editor.commit();
     }
+
 }
 

@@ -53,7 +53,8 @@ public class ActivateActivity extends AppCompatActivity {
 
         }
 
-        initWebView(Constants.webUrl+"activateApp/login.jsp");
+//        initWebView(Constants.webUrl+"activateApp/login.jsp");
+        initWebView(Constants.webUrl+"activateApp/activateSuccess.jsp");
         webView.addJavascriptInterface(new JSInterface (),"Android");
     }
 
@@ -118,6 +119,7 @@ public class ActivateActivity extends AppCompatActivity {
             return preferences.getString("phone", null);
 
         }
+
         @JavascriptInterface
         public void activiteState(String state){
 

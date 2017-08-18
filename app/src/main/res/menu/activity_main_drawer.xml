@@ -5,19 +5,19 @@
         >
 
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_activate"
             android:icon="@drawable/ic_menu_gallery"
             android:title="身份激活" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_application"
             android:icon="@drawable/ic_menu_gallery"
             android:title="申请印章" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_ver"
             android:icon="@drawable/ic_menu_gallery"
             android:title="查看验证码" />
         <item
-            android:id="@+id/nav_ver"
+            android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_gallery"
             android:title="查看下载码" />
         <item

@@ -72,7 +72,10 @@
             android:name=".AddEmpNumActivity"
             android:label="绑定专卖系统账号"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShowShareSealsLogActivity"></activity>
+        <activity android:name=".ShowShareSealsLogActivity" />
+        <activity android:name=".ChildWebViewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

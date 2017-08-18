@@ -47,9 +47,9 @@ public class LookVerActivity extends AppCompatActivity {
             map.put("ItemText_vercode", verlist.get(verlist.size()-1-i).getVercode());
             map.put("ItemText_phone", verlist.get(verlist.size()-1-i).getPhone());
             mylist.add(map);
-            if(mylist.size()>4){
-                break;
-            }
+//            if(mylist.size()>4){
+//                break;
+//            }
         }
         //生成适配器，数组===》ListItem
         SimpleAdapter mSchedule = new SimpleAdapter(this, //没什么解释
