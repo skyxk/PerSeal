@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 import com.clt.perseal.Constants.Constants;
 import com.clt.perseal.Dao.VerCodeDao;
 import com.clt.perseal.Dto.VerCodeDto;
+import com.clt.perseal.Util.StatusUtil;
 
 public class ChildWebViewActivity extends AppCompatActivity {
     public WebView webView = null;
@@ -27,10 +28,13 @@ public class ChildWebViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         url = intent.getExtras().getString("url");
 
+        if(!"activateApp/login.jsp".equals(url)){
+            new StatusUtil(ChildWebViewActivity.this).isActivate();
+        }
+
         initWebView(Constants.webUrl+url);
-//        initWebView("http://www.baidu.com");
         //提供js调用
-//        webView.addJavascriptInterface(new JSInterface(),"Android");
+        webView.addJavascriptInterface(new JSInterface(),"Android");
     }
 
     private void initWebView(String url) {

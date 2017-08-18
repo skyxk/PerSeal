@@ -1,27 +1,16 @@
 package com.clt.perseal;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.support.v7.app.AlertDialog;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.clt.perseal.Dao.UnitDao;
 import com.clt.perseal.Dto.UnitDto;
-import com.clt.perseal.Util.UpdateUtil;
-import com.clt.perseal.WebSerivce.WsControler;
-
-import java.util.StringTokenizer;
-
-import static com.clt.perseal.Constants.Constants.webUrl;
 
 
 /**

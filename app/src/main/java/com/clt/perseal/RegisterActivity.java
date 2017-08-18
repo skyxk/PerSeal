@@ -1,12 +1,10 @@
 package com.clt.perseal;
 
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,10 +17,7 @@ import android.widget.Toast;
 
 import com.clt.perseal.Dao.UnitDao;
 import com.clt.perseal.Dto.UnitDto;
-import com.clt.perseal.Util.Base64Utils;
-import com.clt.perseal.Util.DBManager;
-import com.clt.perseal.Util.SimpleDesede;
-import com.clt.perseal.Util.UpdateUtil;
+import com.clt.perseal.Util.StatusUtil;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText phText ;
@@ -55,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         initDate();
 
-        new UpdateUtil(RegisterActivity.this).Update();
+        new StatusUtil(RegisterActivity.this).Update();
 
     }
     /**

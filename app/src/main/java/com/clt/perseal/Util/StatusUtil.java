@@ -3,16 +3,22 @@ package com.clt.perseal.Util;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.clt.perseal.ActivateActivity;
+import com.clt.perseal.ApplicationActivity;
+import com.clt.perseal.ChildWebViewActivity;
 import com.clt.perseal.Dao.UnitDao;
 
+import com.clt.perseal.MainActivity;
 import com.clt.perseal.WebSerivce.WsControler;
 
 import java.util.StringTokenizer;
@@ -23,13 +29,51 @@ import static com.clt.perseal.Constants.Constants.webUrl;
  * Created by clt_abc on 2017/8/18.
  */
 
-public class UpdateUtil {
+public class StatusUtil {
 
     private Context ct;
-    private UnitDao unitdao;
-    public UpdateUtil(Context context){
+    private String returnvalue;
+    public SharedPreferences preferences;
+    public StatusUtil(Context context){
         ct = context;
     }
+
+    public void isActivate(){
+
+
+        preferences = ct.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+
+        returnvalue = preferences.getString("activiteState", null);
+
+        if("ESSRET:0".equals(returnvalue)){
+
+
+        }else if("ESSRET:1".equals(returnvalue)){
+
+            new AlertDialog.Builder(ct).setTitle("您的手机号尚未激活")//设置对话框标题
+                    .setMessage("是否前往激活")//设置显示的内容
+                    .setPositiveButton("激活",new DialogInterface.OnClickListener() {//添加确定按钮
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                            //手机号未激活，跳转激活页。
+//                            Intent intent_1 = new Intent(ct, ActivateActivity.class);
+//                            ct.startActivity(intent_1);
+                            Intent intent = new Intent(ct, ChildWebViewActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url","activateApp/login.jsp");
+                            intent.putExtras(bundle);
+                            ct.startActivity(intent);
+                        }
+                    }).show();//在按键响应事件中显示此对话框
+        }
+
+    }
+
+
+
+
+
+
 
     //获取应用版本号
     private String getVersionName() throws Exception

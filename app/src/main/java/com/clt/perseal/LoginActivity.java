@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.clt.perseal.Dao.UnitDao;
 import com.clt.perseal.Dao.VerCodeDao;
 import com.clt.perseal.Dto.UnitDto;
-import com.clt.perseal.Util.UpdateUtil;
+import com.clt.perseal.Util.StatusUtil;
 
 /**
  * A login screen that offers login via email/password.
@@ -44,7 +44,7 @@ public class LoginActivity extends Activity {
 
         initDate();
 
-        new UpdateUtil(LoginActivity.this).Update();
+        new StatusUtil(LoginActivity.this).Update();
 
     }
 

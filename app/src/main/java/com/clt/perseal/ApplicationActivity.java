@@ -111,7 +111,6 @@ public class ApplicationActivity extends AppCompatActivity {
     }
     class JSInterface {
         @JavascriptInterface
-
         //供H5页面调用
         public void insertVer(String ver){
             //获取当前手机号
@@ -124,10 +123,10 @@ public class ApplicationActivity extends AppCompatActivity {
             //添加验证码
             verDao.addVerCode(verDto);
         }
-//        @JavascriptInterface
-//        public String getPhone(){
-//            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
-//            return preferences.getString("phone", null);
-//        }
+        @JavascriptInterface
+        public String getPhone(){
+            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            return preferences.getString("phone", null);
+        }
     }
 }
