@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +13,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.clt.perseal.Activity.ActivateActivity;
 import com.clt.perseal.Constants.Constants;
 import com.clt.perseal.Dao.VerCodeDao;
 import com.clt.perseal.Dto.VerCodeDto;
-import com.clt.perseal.WebSerivce.WsControler;
 
 public class ApplicationActivity extends AppCompatActivity {
     public WebView webView = null;

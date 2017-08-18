@@ -29,7 +29,7 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".ActivateActivity"
+            android:name=".Activity.ActivateActivity"
             android:label="@string/activatelabel"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -53,26 +53,26 @@
         <activity android:name=".SecretVerifyActivity" />
         <activity android:name=".AccountActivity" />
         <activity
-            android:name=".TemporaryActivity"
+            android:name=".Activity.TemporaryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".EditPswActivity"
+            android:name=".Activity.EditPswActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ShowSignatureLogActivity"
+            android:name=".Activity.ShowSignatureLogActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DownloadCodeActivity"
+            android:name=".Activity.DownloadCodeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ShowShareSealsLoginActivity"
+            android:name=".Activity.ShowShareSealsLoginActivity"
             android:label="个人授权激活"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddEmpNumActivity"
+            android:name=".Activity.AddEmpNumActivity"
             android:label="绑定专卖系统账号"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShowShareSealsLogActivity" />
+        <activity android:name=".Activity.ShowShareSealsLogActivity" />
         <activity android:name=".ChildWebViewActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"/>

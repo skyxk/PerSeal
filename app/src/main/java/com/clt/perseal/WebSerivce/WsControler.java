@@ -78,7 +78,6 @@ public class WsControler {
 //        soapSerializationEnvelope.setOutputSoapObject(soapObject);
         soapSerializationEnvelope.dotNet= false;//这里如果设置为TRUE,那么在服务器端将获取不到参数值(如:将这些数据插入到数据库中的话)
 
-        //线程接口
         try {
             // 调用WebService
             httpTransportSE.call(null, soapSerializationEnvelope);
@@ -93,8 +92,6 @@ public class WsControler {
             e.printStackTrace();
         }
         return null;
-
     }
-
 
 }

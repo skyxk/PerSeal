@@ -1,4 +1,4 @@
-package com.clt.perseal;
+package com.clt.perseal.Activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,20 +11,28 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.clt.perseal.Constants.Constants;
+import com.clt.perseal.Dao.VerCodeDao;
+import com.clt.perseal.Dto.VerCodeDto;
+import com.clt.perseal.R;
 
-public class DownloadCodeActivity extends AppCompatActivity {
-    private WebView webView;
+public class ShowShareSealsLoginActivity extends AppCompatActivity {
+    public WebView webView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_download_code);
+        setContentView(R.layout.activity_show_share_seals_login);
 
-        initWebView(Constants.webUrl+"activateApp/showPinLogin.jsp");
+
+        //初始化webview
+        initWebView(Constants.webUrl+"activateApp/showShareSealsLogin.jsp");
+        //提供js调用
         webView.addJavascriptInterface(new JSInterface(),"Android");
+
     }
 
+
     private void initWebView(String url) {
-        webView = (WebView) findViewById(R.id.webView3);
+        webView = (WebView) findViewById(R.id.webView8);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
@@ -67,22 +75,29 @@ public class DownloadCodeActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
-                SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
-                webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
+
             }
         });
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
     class JSInterface {
+        @JavascriptInterface
 
+        //供H5页面调用
+        public void insertVer(String ver){
+            //获取当前手机号
+            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            String phone = preferences.getString("phone", null);
+            VerCodeDao verDao = new VerCodeDao(ShowShareSealsLoginActivity.this);
+            VerCodeDto verDto = new VerCodeDto();
+            verDto.setPhone(phone);
+            verDto.setVercode(ver);
+            //添加验证码
+            verDao.addVerCode(verDto);
+        }
         @JavascriptInterface
         public String getPhone(){
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
-
         }
     }
 

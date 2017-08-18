@@ -9,16 +9,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.clt.perseal.ActivateActivity;
-import com.clt.perseal.ApplicationActivity;
 import com.clt.perseal.ChildWebViewActivity;
-import com.clt.perseal.Dao.UnitDao;
 
-import com.clt.perseal.MainActivity;
 import com.clt.perseal.WebSerivce.WsControler;
 
 import java.util.StringTokenizer;

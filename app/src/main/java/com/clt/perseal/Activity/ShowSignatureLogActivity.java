@@ -1,11 +1,7 @@
-package com.clt.perseal;
+package com.clt.perseal.Activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.StrictMode;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
@@ -15,51 +11,22 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.clt.perseal.Constants.Constants;
-import com.clt.perseal.Util.DBManager;
-import com.clt.perseal.WebSerivce.WsControler;
+import com.clt.perseal.R;
 
-public class ActivateActivity extends AppCompatActivity {
+public class ShowSignatureLogActivity extends AppCompatActivity {
     private WebView webView;
-    public SharedPreferences preferences;
-    private String returnvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activate);
+        setContentView(R.layout.activity_show_signature_log);
 
 
-        preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
-
-        returnvalue = preferences.getString("activiteState", null);
-
-        if("ESSRET:0".equals(returnvalue)){
-
-            new AlertDialog.Builder(ActivateActivity.this).setTitle("您的手机号已经激活")//设置对话框标题
-                    .setMessage("不能再次激活")//设置显示的内容
-                    .setPositiveButton("确认",new DialogInterface.OnClickListener() {//添加确定按钮
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
-                            finish();
-                        }
-                    }).setNegativeButton("退出",new DialogInterface.OnClickListener() {//添加返回按钮
-                @Override
-                public void onClick(DialogInterface dialog, int which) {//响应事件
-                    finish();
-                }
-            }).show();//在按键响应事件中显示此对话框
-
-        }else if("ESSRET:1".equals(returnvalue)){
-
-
-        }
-
-//        initWebView(Constants.webUrl+"activateApp/login.jsp");
-        initWebView(Constants.webUrl+"activateApp/activateSuccess.jsp");
-        webView.addJavascriptInterface(new JSInterface (),"Android");
+        initWebView(Constants.webUrl+"activateApp/showSignatureLogLogin.jsp");
+        webView.addJavascriptInterface(new JSInterface(),"Android");
     }
 
     private void initWebView(String url) {
-        webView = (WebView) findViewById(R.id.webView);
+        webView = (WebView) findViewById(R.id.webView6);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
@@ -102,14 +69,12 @@ public class ActivateActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
-
+                SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
             }
         });
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+
     class JSInterface {
 
         @JavascriptInterface
@@ -118,19 +83,6 @@ public class ActivateActivity extends AppCompatActivity {
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
 
-        }
-
-        @JavascriptInterface
-        public void activiteState(String state){
-
-            //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
-            SharedPreferences preferences = ActivateActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
-            
-            //取到编辑器
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("activiteState", state);
-            //把数据提交给文件中
-            editor.commit();
         }
     }
 }

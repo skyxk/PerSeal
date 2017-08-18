@@ -1,7 +1,10 @@
-package com.clt.perseal;
+package com.clt.perseal.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
@@ -15,16 +18,45 @@ import com.clt.perseal.Dao.VerCodeDao;
 import com.clt.perseal.Dto.VerCodeDto;
 import com.clt.perseal.R;
 
-public class ShowShareSealsLoginActivity extends AppCompatActivity {
+public class AddEmpNumActivity extends AppCompatActivity {
     public WebView webView = null;
+    public SharedPreferences preferences;
+    private String returnvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_share_seals_login);
+        setContentView(R.layout.activity_add_emp_num);
 
+
+        preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+
+        returnvalue = preferences.getString("activiteState", null);
+
+        if("ESSRET:0".equals(returnvalue)){
+
+
+        }else if("ESSRET:1".equals(returnvalue)){
+
+            new AlertDialog.Builder(AddEmpNumActivity.this).setTitle("您的手机号尚未激活")//设置对话框标题
+                    .setMessage("是否前往激活")//设置显示的内容
+                    .setPositiveButton("激活",new DialogInterface.OnClickListener() {//添加确定按钮
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                            //手机号未激活，跳转激活页。
+                            Intent intent_1 = new Intent(AddEmpNumActivity.this, ActivateActivity.class);
+                            startActivity(intent_1);
+                            finish();
+                        }
+                    }).setNegativeButton("退出",new DialogInterface.OnClickListener() {//添加返回按钮
+                @Override
+                public void onClick(DialogInterface dialog, int which) {//响应事件
+                    finish();
+                }
+            }).show();//在按键响应事件中显示此对话框
+        }
 
         //初始化webview
-        initWebView(Constants.webUrl+"activateApp/showShareSealsLogin.jsp");
+        initWebView(Constants.webUrl+"activateApp/addEmpNum.jsp");
         //提供js调用
         webView.addJavascriptInterface(new JSInterface(),"Android");
 
@@ -32,7 +64,7 @@ public class ShowShareSealsLoginActivity extends AppCompatActivity {
 
 
     private void initWebView(String url) {
-        webView = (WebView) findViewById(R.id.webView8);
+        webView = (WebView) findViewById(R.id.webView9);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
@@ -87,7 +119,7 @@ public class ShowShareSealsLoginActivity extends AppCompatActivity {
             //获取当前手机号
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             String phone = preferences.getString("phone", null);
-            VerCodeDao verDao = new VerCodeDao(ShowShareSealsLoginActivity.this);
+            VerCodeDao verDao = new VerCodeDao(AddEmpNumActivity.this);
             VerCodeDto verDto = new VerCodeDto();
             verDto.setPhone(phone);
             verDto.setVercode(ver);
@@ -100,5 +132,4 @@ public class ShowShareSealsLoginActivity extends AppCompatActivity {
             return preferences.getString("phone", null);
         }
     }
-
 }

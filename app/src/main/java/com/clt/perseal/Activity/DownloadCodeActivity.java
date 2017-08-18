@@ -1,4 +1,4 @@
-package com.clt.perseal;
+package com.clt.perseal.Activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,26 +11,21 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.clt.perseal.Constants.Constants;
+import com.clt.perseal.R;
 
-public class ShowShareSealsLogActivity extends AppCompatActivity {
+public class DownloadCodeActivity extends AppCompatActivity {
     private WebView webView;
-    public SharedPreferences preferences;
-    private String returnvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_share_seals_log);
+        setContentView(R.layout.activity_download_code);
 
-
-
-
-
-        initWebView(Constants.webUrl+"activateApp/showShareSealsLogLogin.jsp");
+        initWebView(Constants.webUrl+"activateApp/showPinLogin.jsp");
         webView.addJavascriptInterface(new JSInterface(),"Android");
     }
 
     private void initWebView(String url) {
-        webView = (WebView) findViewById(R.id.webView10);
+        webView = (WebView) findViewById(R.id.webView3);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
@@ -86,22 +81,10 @@ public class ShowShareSealsLogActivity extends AppCompatActivity {
 
         @JavascriptInterface
         public String getPhone(){
-
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
 
         }
-        @JavascriptInterface
-        public void activiteState(String state){
-
-            //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
-            SharedPreferences preferences = ShowShareSealsLogActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
-
-            //取到编辑器
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("activiteState", state);
-            //把数据提交给文件中
-            editor.commit();
-        }
     }
+
 }

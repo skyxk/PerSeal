@@ -1,10 +1,9 @@
-package com.clt.perseal;
+package com.clt.perseal.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,17 +14,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.clt.perseal.Constants.Constants;
-import com.clt.perseal.Util.DBManager;
-import com.clt.perseal.WebSerivce.WsControler;
+import com.clt.perseal.R;
 
-public class EditPswActivity extends AppCompatActivity {
-    private WebView webView;
+public class TemporaryActivity extends AppCompatActivity {
+    public WebView webView = null;
     public SharedPreferences preferences;
     private String returnvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_psw);
+        setContentView(R.layout.activity_temporary);
 
         preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
 
@@ -36,13 +34,13 @@ public class EditPswActivity extends AppCompatActivity {
 
         }else if("ESSRET:1".equals(returnvalue)){
 
-            new AlertDialog.Builder(EditPswActivity.this).setTitle("您的手机号尚未激活")//设置对话框标题
+            new AlertDialog.Builder(TemporaryActivity.this).setTitle("您的手机号尚未激活")//设置对话框标题
                     .setMessage("是否前往激活")//设置显示的内容
                     .setPositiveButton("激活",new DialogInterface.OnClickListener() {//添加确定按钮
                         @Override
                         public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
                             //手机号未激活，跳转激活页。
-                            Intent intent_1 = new Intent(EditPswActivity.this, ActivateActivity.class);
+                            Intent intent_1 = new Intent(TemporaryActivity.this, ActivateActivity.class);
                             startActivity(intent_1);
                             finish();
                         }
@@ -53,21 +51,21 @@ public class EditPswActivity extends AppCompatActivity {
                 }
             }).show();//在按键响应事件中显示此对话框
         }
-        initWebView(Constants.webUrl+"activateApp/editPsw.jsp");
+
+        //初始化webview
+        initWebView(Constants.webUrl+"activateApp/temporaryAuth.jsp");
+        //提供js调用
         webView.addJavascriptInterface(new JSInterface(),"Android");
-
     }
-
-
-    private void initWebView(String url){
-        webView = (WebView) findViewById(R.id.webView4);
+    private void initWebView(String url) {
+        webView = (WebView) findViewById(R.id.webView7);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
         //设置可以访问文件
         webSettings.setAllowFileAccess(true);
         //设置支持缩放
-        webSettings.setBuiltInZoomControls(true);
+//        webSettings.setBuiltInZoomControls(true);
         //WebView加载web资源
         webView.loadUrl(url);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
@@ -106,12 +104,11 @@ public class EditPswActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
     class JSInterface {
-
         @JavascriptInterface
+
+        //供H5页面调用
         public String getPhone(){
             SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
