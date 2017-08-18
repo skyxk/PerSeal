@@ -12,11 +12,8 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.clt.perseal.Dao.UnitDao;
-import com.clt.perseal.Dto.UnitDto;
-import com.clt.perseal.LoginActivity;
-import com.clt.perseal.RegisterActivity;
+
 import com.clt.perseal.WebSerivce.WsControler;
-import com.clt.perseal.WelcomeActivity;
 
 import java.util.StringTokenizer;
 
