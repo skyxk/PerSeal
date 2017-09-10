@@ -104,7 +104,7 @@
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="15dp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -149,7 +149,16 @@
             android:textSize="18dp"
             android:text="注  销"
             android:textColor="#f90b0b0b" />
+        <Switch
+            android:id="@+id/switch_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="否"
+            android:textOn="是"
+            android:text="是否使用测试环境" />
     </LinearLayout>
+
+
 
 
 </LinearLayout>

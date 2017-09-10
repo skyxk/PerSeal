@@ -18,7 +18,7 @@ import com.clt.perseal.Util.StatusUtil;
 
 public class ChildWebViewActivity extends AppCompatActivity {
     public WebView webView = null;
-    public SharedPreferences preferences;
+    private SharedPreferences preferences;
     public String url  =null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,9 @@ public class ChildWebViewActivity extends AppCompatActivity {
             new StatusUtil(ChildWebViewActivity.this).isActivate();
         }
 
-        initWebView(Constants.webUrl+url);
+
+        preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+        initWebView(preferences.getString("ip", null)+url);
         //提供js调用
         webView.addJavascriptInterface(new JSInterface(),"Android");
     }
@@ -81,7 +83,7 @@ public class ChildWebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
-                SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
                 webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
             }
         });
@@ -92,7 +94,7 @@ public class ChildWebViewActivity extends AppCompatActivity {
         //供H5页面调用
         public void insertVer(String ver){
             //获取当前手机号
-            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             String phone = preferences.getString("phone", null);
             VerCodeDao verDao = new VerCodeDao(ChildWebViewActivity.this);
             VerCodeDto verDto = new VerCodeDto();
@@ -103,7 +105,7 @@ public class ChildWebViewActivity extends AppCompatActivity {
         }
         @JavascriptInterface
         public String getPhone(){
-            SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+            preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
             return preferences.getString("phone", null);
         }
     }

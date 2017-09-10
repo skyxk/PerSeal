@@ -8,7 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ public class LoginActivity extends Activity {
     private Button mChgebtn;
     private Button mRgrbtn;
     private Button removbtn;
+    private Switch open;
+
 
     private String phone;
     private String password;
@@ -69,6 +73,8 @@ public class LoginActivity extends Activity {
         mRgrbtn = (Button)findViewById(R.id.register_btn);
         //注销
         removbtn = (Button) findViewById(R.id.removed_btn);
+
+        open = (Switch) findViewById(R.id.switch_ip);
 
         mLgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +149,39 @@ public class LoginActivity extends Activity {
                     }
                 }else{
                     Toast.makeText(LoginActivity.this,"请填写手机号",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
+        SharedPreferences preferences = LoginActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+        //取到编辑器
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("ip", "http://10.88.4.102:9080/EssApp/");
+        //把数据提交给文件中
+        editor.commit();
+        open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                // TODO Auto-generated method stub
+                if (isChecked) {
+                    //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
+                    SharedPreferences preferences = LoginActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                    //取到编辑器
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("ip", "http://10.88.4.102:8082/EssApp/");
+                    //把数据提交给文件中
+                    editor.commit();
+                } else {
+                    //第一个参数 指定名称 不需要写后缀名 第二个参数文件的操作模式
+                    SharedPreferences preferences = LoginActivity.this.getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                    //取到编辑器
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("ip", "http://10.88.4.102:9080/EssApp/");
+                    //把数据提交给文件中
+                    editor.commit();
                 }
             }
         });

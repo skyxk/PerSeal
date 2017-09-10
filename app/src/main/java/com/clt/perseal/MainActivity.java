@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public WebView webView = null;
     public TextView headPhone = null;
-
+    public SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +45,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+
+        String ip = preferences.getString("ip", null);
+
         //初始化webview
-        initWebView(Constants.webUrl+"activateApp/activateIndex.jsp");
+        initWebView(ip+"activateApp/activateIndex.jsp");
         //提供js调用
         webView.addJavascriptInterface(new JSInterface1(),"Android");
 

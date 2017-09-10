@@ -8,7 +8,7 @@ public class Const {
     public class WSConst {
         public class t01 {
 //            public static final String URL="http://10.88.4.102:9080/EssApp/ws/mycxf";
-            public static final String URL="http://192.168.1.108:8083/EssApp/ws/mycxf";
+            public static final String URL="http://10.88.4.102:9080/EssApp/ws/mycxf";
             //命名空间
             public static final String nameSpace="http://service.esign.cn/";
             //调用方法名
