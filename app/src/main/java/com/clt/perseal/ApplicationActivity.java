@@ -104,7 +104,7 @@ public class ApplicationActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
                 SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
-                webView.loadUrl("javascript:("+"'"+preferences.getString("phone", null)+"'"+")");
+                webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
             }
         });
     }

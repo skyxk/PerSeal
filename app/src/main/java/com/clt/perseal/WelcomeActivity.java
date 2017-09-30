@@ -13,10 +13,6 @@ import com.clt.perseal.Dao.UnitDao;
 import com.clt.perseal.Dto.UnitDto;
 
 
-/**
- * Created by clt_abc on 2017/4/26.
- */
-
 public class WelcomeActivity extends Activity {
     private UnitDao unitdao;
 

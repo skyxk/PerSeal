@@ -24,6 +24,7 @@ import java.util.List;
 public class LookVerActivity extends AppCompatActivity {
     private WebView webView;
     private VerCodeDao verDao;
+    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +65,11 @@ public class LookVerActivity extends AppCompatActivity {
 //        list.setAdapter(mSchedule);
 
 
+        preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
 
 
         //初始化webview
-        initWebView(Constants.webUrl+"activateApp/showDownVerLogin.jsp");
+        initWebView(preferences.getString("ip", null)+"activateApp/showDownVerLogin.jsp");
 //        initWebView("http://www.baidu.com");
         //提供js调用
         webView.addJavascriptInterface(new JSInterface(),"Android");
@@ -122,6 +124,8 @@ public class LookVerActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 //页面加载结束后可执行
                 SharedPreferences preferences = getSharedPreferences("perseal", Context.MODE_PRIVATE);
+                String  aaa  = preferences.getString("phone", null);
+
                 webView.loadUrl("javascript:getPhoneAndroid("+"'"+preferences.getString("phone", null)+"'"+")");
             }
         });
